@@ -12,131 +12,136 @@
         padding: 0;
       }
       header {
-        text-align: center;
-        background-color: #4caf50;
+        background-color: #333;
         color: white;
         padding: 20px;
+        text-align: center;
       }
       .content {
+        max-width: 800px;
+        margin: 20px auto;
         padding: 20px;
         background-color: white;
-        margin: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
-      .method-list {
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        padding: 10px;
-      }
-      .method-list span {
-        display: block;
-        margin: 5px 0;
-        font-size: 14px;
+      h2 {
+        color: #333;
       }
       input[type="text"] {
         padding: 10px;
-        margin: 5px 0;
+        margin: 10px 0;
         width: 100%;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 5px;
+        font-size: 16px;
       }
       button {
-        padding: 10px 20px;
-        background-color: #4caf50;
+        padding: 10px 15px;
+        background-color: #28a745;
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 5px;
         cursor: pointer;
+        font-size: 16px;
       }
       button:hover {
-        background-color: #45a049;
+        background-color: #218838;
+      }
+      .method-list {
+        margin-top: 20px;
+        padding-left: 20px;
+        list-style-type: none;
+      }
+      .method-list span {
+        display: block;
+        margin: 10px 0;
+      }
+      .output {
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      .output p {
+        margin: 10px 0;
       }
       #show-error {
         color: red;
-        font-weight: bold;
       }
       #show-success {
         color: green;
-        font-weight: bold;
-      }
-      #show-data {
-        font-size: 18px;
-        padding: 10px;
-        margin-top: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Insert in JavaScript</h1>
+      <h1>Insert Element in Array</h1>
     </header>
-    <div id="show-data">
-      Current Data: [2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23]
-    </div>
-    <div>
-      <input type="text" placeholder="Enter a new value" id="new-value" />
-      <input type="number" placeholder="Enter a position" id="position" />
-      <button onclick="handleEnterNewValue()">Enter</button>
-    </div>
-    <br />
-    <div id="show-error"></div>
-    <div id="show-success"></div>
 
     <div class="content">
-      <b>What is Inserting?</b>
-      <br />
-      <b>Answer:</b>
-      <span class="answer">Insert a value into any position of an Array.</span>
-      <br />
-      <br />
-      <b>Methods for Inserting:</b>
+      <h2>What is Inserting?</h2>
+      <p>
+        Inserting means adding an element into a specific position within an
+        array. This can be done using different methods based on whether you
+        want to insert an element at the beginning, end, or at a specific
+        position within the array.
+      </p>
+
+      <h3>Methods for Inserting:</h3>
       <div class="method-list">
-        <b>Answer:</b>
-        <span>1. **push()** - Adds an element at the end of the array.</span>
-        <span
-          >2. **unshift()** - Adds an element at the beginning of the
-          array.</span
-        >
-        <span
-          >3. **splice()** - Adds an element at a specific index of the
-          array.</span
-        >
+        <p><b>1. push()</b> - Adds an element at the end of the array.</p>
+        <p>
+          <b>2. unshift()</b> - Adds an element at the beginning of the array.
+        </p>
+        <p>
+          <b>3. splice()</b> - Adds an element at a specific index of the array.
+        </p>
       </div>
-      <br />
+
+      <h3>Insert a New Element:</h3>
+      <input type="text" placeholder="Enter a new data" id="new-value" />
+      <input type="text" placeholder="Enter a position" id="position" />
+      <button onclick="handleEnterNewValue()">Insert</button>
+
+      <div id="show-error"></div>
+      <div id="show-success"></div>
+
+      <div class="output" id="show-data">
+        <p>Current Array:</p>
+        <p>[ 2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23 ]</p>
+      </div>
     </div>
 
     <script>
       const data = [2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23];
       const showDataDiv = document.getElementById("show-data");
-      const showError = document.getElementById("show-error");
-      const showSuccess = document.getElementById("show-success");
+      showDataDiv.innerHTML = `<p>Current Array: [ ${data} ]</p>`;
 
       function handleEnterNewValue() {
         const newValue = document.getElementById("new-value").value;
         const position = parseInt(document.getElementById("position").value);
-
-        if (!newValue) {
-          showError.innerHTML = "Please enter a value to insert.";
-          return;
-        }
+        const showError = document.getElementById("show-error");
+        const showSuccess = document.getElementById("show-success");
 
         if (
           typeof position === "number" &&
           position >= 0 &&
           position <= data.length
         ) {
-          // Insert value using splice (insert at specified position)
-          data.splice(position, 0, newValue);
-
-          showSuccess.innerHTML = "Data inserted successfully!";
-          showError.innerHTML = "";
-          showDataDiv.innerHTML = `Current Data: [${data}]`;
+          for (let i = 0; i < data.length; i++) {
+            if (i >= position) {
+              data[i + 1] = data[i];
+              if (i === position) {
+                data[i] = newValue;
+                showSuccess.innerHTML = "Data inserted successfully!";
+                showDataDiv.innerHTML = `<p>Updated Array: [ ${data} ]</p>`;
+                break;
+              }
+            }
+          }
         } else {
-          showError.innerHTML = `Please provide a position between 0 and ${data.length}.`;
-          showSuccess.innerHTML = "";
+          showError.innerHTML = `Please provide a valid position between 0 and ${
+            data.length - 1
+          }.`;
         }
       }
     </script>
