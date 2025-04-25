@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traversing</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7fc;
+      }
+      header {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+      h1 {
+        margin: 0;
+      }
+      .content {
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      b {
+        color: #34495e;
+      }
+      .answer {
+        color: #16a085;
+        font-weight: normal;
+        margin-left: 5px;
+      }
+      #print-value {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #ecf0f1;
+        border-radius: 5px;
+        border: 1px solid #bdc3c7;
+      }
+      #print-value p {
+        margin: 10px 0;
+        color: #2c3e50;
+      }
+      .method-list {
+        padding: 10px;
+        background-color: #f1c40f;
+        color: white;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .method-list b {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Traversing Methods in JavaScript</h1>
+    </header>
+    <div class="content">
+      <b>What is Traversing?</b>
+      <br />
+      <b>Answer:</b>
+      <span class="answer"
+        >Traversing means accessing each element of an array one by one.</span
+      >
+      <br />
+      <br />
+      <b>Methods for Traversing:</b>
+      <div class="method-list">
+        <b>Answer:</b>
+        <span
+          >for, forEach(), map(), for...of, for...in, reduce(), filter(),
+          some(), every(), find(), findIndex(), entries(), Object.keys(),
+          Object.values(), Object.entries()</span
+        >
+      </div>
+      <br />
+      <div id="print-value"></div>
+    </div>
+    <script>
+      const data = [10, 34, 675, 2, 6, 4, 7, 8, 4, 54, 4, 3];
+      const parent = document.getElementById("print-value");
+      let outputHTML = ``;
+      for (let i = 0; i < data.length; i++) {
+        outputHTML =
+          outputHTML +
+          `<p>The value of Array's position ${i + 1} is <strong>${
+            data[i]
+          }</strong></p>`;
+      }
+      console.log({ outputHTML });
+      parent.innerHTML = outputHTML;
+    </script>
+  </body>
+</html>

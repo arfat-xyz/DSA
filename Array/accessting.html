@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessing Methods in JavaScript</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .content {
+        padding: 20px;
+        margin: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .content b {
+        font-size: 18px;
+        color: #333;
+      }
+      .method-list {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+      .method-list span {
+        display: block;
+        margin-top: 5px;
+        font-size: 16px;
+        color: #555;
+      }
+      .answer {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      #input-value {
+        padding: 10px;
+        font-size: 16px;
+        width: 200px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #print-value {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Accessing Methods in JavaScript</h1>
+    </header>
+    <div id="print-value"></div>
+    <input id="input-value" placeholder="Enter a integer" type="text" />
+    <button onclick="handleInput()">Get Value</button>
+    <div class="content">
+      <b>What is Accessing?</b>
+      <br />
+      <b>Answer:</b>
+      <span class="answer">
+        Accessing means getting the value of a particular element at a specific
+        index.
+      </span>
+      <br />
+      <br />
+      <b>Methods for Accessing:</b>
+      <div class="method-list">
+        <b>Answer:</b>
+        <span>
+          Direct Indexing (Array): const data = [10, 20, 30];
+          console.log(data[1]); // Outputs 20,
+          <br />
+          <br /><br />
+          at(): const data = [10, 20, 30]; console.log(data.at(-1)); // Outputs
+          30 (last element),
+          <br />
+          <br /><br />
+          find(): const data = [10, 20, 30]; console.log(data.find(item => item
+          > 15)); // Outputs 20,
+          <br />
+          <br /><br />
+          findIndex(): const data = [10, 20, 30];
+          console.log(data.findIndex(item => item > 15)); // Outputs 1 (index of
+          20),
+          <br />
+          <br /><br />
+          filter(): const data = [10, 20, 30]; console.log(data.filter(item =>
+          item > 15)); // Outputs [20, 30],
+          <br />
+          <br /><br />
+          map(): const data = [10, 20, 30]; console.log(data.map(item => item *
+          2)); // Outputs [20, 40, 60],
+          <br />
+          <br /><br />
+          Destructuring Assignment (Array): const data = [10, 20, 30]; const
+          [first, second] = data; console.log(first); // Outputs 10,
+          <br />
+          <br /><br />
+          Dot Notation (Object): const person = { name: "John", age: 30 };
+          console.log(person.name); // Outputs "John",
+          <br />
+          <br /><br />
+          Bracket Notation (Object): const person = { name: "John", age: 30 };
+          console.log(person["age"]); // Outputs 30,
+          <br />
+          <br /><br />
+          Object.keys(): const person = { name: "John", age: 30 };
+          console.log(Object.keys(person)); // Outputs ["name", "age"],
+          <br />
+          <br /><br />
+          Object.values(): const person = { name: "John", age: 30 };
+          console.log(Object.values(person)); // Outputs ["John", 30],
+          <br />
+          <br /><br />
+          Object.entries(): const person = { name: "John", age: 30 };
+          console.log(Object.entries(person)); // Outputs [["name", "John"],
+          ["age", 30]],
+          <br />
+          <br /><br />
+          hasOwnProperty(): const person = { name: "John", age: 30 };
+          console.log(person.hasOwnProperty("name")); // Outputs true,
+          <br />
+          <br /><br />
+          Dot Notation for Nested Objects: const person = { name: "John",
+          address: { city: "New York" } }; console.log(person.address.city); //
+          Outputs "New York",
+          <br />
+          <br /><br />
+          Bracket Notation for Nested Objects: const person = { name: "John",
+          address: { "home city": "New York" } };
+          console.log(person["address"]["home city"]); // Outputs "New York",
+          <br />
+          <br /><br />
+          Destructuring Nested Objects: const person = { name: "John", address:
+          { city: "New York" } }; const { address: { city } } = person;
+          console.log(city); // Outputs "New York",
+          <br />
+          <br /><br />
+          Accessing Nested Arrays: const data = [[1, 2], [3, 4], [5, 6]];
+          console.log(data[1][0]); // Outputs 3,
+          <br />
+          <br /><br />
+          String.charAt(): const str = "Hello"; console.log(str.charAt(1)); //
+          Outputs "e",
+          <br />
+          <br /><br />
+          String.at(): const str = "Hello"; console.log(str.at(-1)); // Outputs
+          "o" (last character),
+          <br />
+          <br /><br />
+          Array.slice(): const data = [10, 20, 30]; console.log(data.slice(1,
+          3)); // Outputs [20, 30],
+          <br />
+          <br /><br />
+          Array.splice(): const data = [10, 20, 30]; data.splice(1, 1, 25);
+          console.log(data); // Outputs [10, 25, 30].
+        </span>
+      </div>
+      <br />
+    </div>
+    <script>
+      const data = [10, 34, 675, 2, 6, 4, 7, 8, 4, 54, 4, 3];
+      const printValue = document.getElementById("print-value");
+
+      function handleInput() {
+        const inputValue = document.getElementById("input-value").value;
+        const numberedInputValue = parseInt(inputValue);
+        if (
+          typeof numberedInputValue === "number" &&
+          numberedInputValue < data.length &&
+          numberedInputValue >= 0
+        ) {
+          printValue.innerHTML = `Accessed value is: ${data[numberedInputValue]}`;
+        } else {
+          printValue.innerHTML = `Please provide a valid input between 0 - ${
+            data.length - 1
+          }`;
+        }
+      }
+    </script>
+  </body>
+</html>
