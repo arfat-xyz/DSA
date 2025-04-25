@@ -83,21 +83,22 @@
     <div id="show-success"></div>
 
     <div class="content">
-      <b>What is Inserting?</b>
+      <b>What is Delete?</b>
       <br />
       <b>Answer:</b>
-      <span class="answer">Insert a value into any position of an Array.</span>
+      <span class="answer">Delete a value into any position of an Array.</span>
       <br />
       <br />
-      <b>Methods for Inserting:</b>
+      <b>Methods for Delete:</b>
       <div class="method-list">
-        <b>Answer:</b>
+        <b>Answer:</b>pop(), shift(), splice(), delete, filter(), slice(),
+        delete (objects).
       </div>
       <br />
     </div>
 
     <script>
-      const data = [2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23];
+      const data = [5, 6, 7, 8, 23, 5, 32, 6, 34, 23, 6, 3, 78, 18, 11];
       const showDataDiv = document.getElementById("show-data");
       const showError = document.getElementById("show-error");
       const showSuccess = document.getElementById("show-success");
@@ -111,8 +112,10 @@
           position >= 0 &&
           position <= data.length
         ) {
-          // Insert value using splice (insert at specified position)
-          data.splice(position, 0, newValue);
+          for (let i = position; i < data.length; i++) {
+            data[i] = data[i + 1];
+          }
+          data.length = data.length - 1;
 
           showSuccess.innerHTML = "Data inserted successfully!";
           showError.innerHTML = "";
