@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insert An Element</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        text-align: center;
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+      }
+      .content {
+        padding: 20px;
+        background-color: white;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .method-list {
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      .method-list span {
+        display: block;
+        margin: 5px 0;
+        font-size: 14px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        margin: 5px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #show-error {
+        color: red;
+        font-weight: bold;
+      }
+      #show-success {
+        color: green;
+        font-weight: bold;
+      }
+      #show-data {
+        font-size: 18px;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Insert in JavaScript</h1>
+    </header>
+    <div id="show-data">
+      Current Data: [2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23]
+    </div>
+    <div>
+      <input type="text" placeholder="Enter a new value" id="new-value" />
+      <input type="number" placeholder="Enter a position" id="position" />
+      <button onclick="handleEnterNewValue()">Enter</button>
+    </div>
+    <br />
+    <div id="show-error"></div>
+    <div id="show-success"></div>
+
+    <div class="content">
+      <b>What is Inserting?</b>
+      <br />
+      <b>Answer:</b>
+      <span class="answer">Insert a value into any position of an Array.</span>
+      <br />
+      <br />
+      <b>Methods for Inserting:</b>
+      <div class="method-list">
+        <b>Answer:</b>
+        <span>1. **push()** - Adds an element at the end of the array.</span>
+        <span
+          >2. **unshift()** - Adds an element at the beginning of the
+          array.</span
+        >
+        <span
+          >3. **splice()** - Adds an element at a specific index of the
+          array.</span
+        >
+      </div>
+      <br />
+    </div>
+
+    <script>
+      const data = [2, 34, 26, 53, 90, 6, 4, 6, 4, 6, 32, 6, 23];
+      const showDataDiv = document.getElementById("show-data");
+      const showError = document.getElementById("show-error");
+      const showSuccess = document.getElementById("show-success");
+
+      function handleEnterNewValue() {
+        const newValue = document.getElementById("new-value").value;
+        const position = parseInt(document.getElementById("position").value);
+
+        if (!newValue) {
+          showError.innerHTML = "Please enter a value to insert.";
+          return;
+        }
+
+        if (
+          typeof position === "number" &&
+          position >= 0 &&
+          position <= data.length
+        ) {
+          // Insert value using splice (insert at specified position)
+          data.splice(position, 0, newValue);
+
+          showSuccess.innerHTML = "Data inserted successfully!";
+          showError.innerHTML = "";
+          showDataDiv.innerHTML = `Current Data: [${data}]`;
+        } else {
+          showError.innerHTML = `Please provide a position between 0 and ${data.length}.`;
+          showSuccess.innerHTML = "";
+        }
+      }
+    </script>
+  </body>
+</html>
