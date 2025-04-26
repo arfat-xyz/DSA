@@ -1,8 +1,8 @@
-Absolutely! Let's walk through each of the three Fibonacci implementations and compare them in terms of **logic**, **efficiency**, and **practical usage**.
+# Fibonacci number best case is `Iterative Fibonacci with Temp Variable`
 
 ---
 
-## ✅ 1. **Recursive Fibonacci**
+## ✅ 1. **Recursive Fibonacci (Naive)**
 
 ```js
 var fib = function (n) {
@@ -11,28 +11,24 @@ var fib = function (n) {
 };
 ```
 
-### 🔍 How it works:
+### 🔍 How It Works:
 
-- This is the most straightforward and intuitive approach.
-- It directly follows the definition: `fib(n) = fib(n-1) + fib(n-2)`.
+- Recursively calls `fib(n-1)` and `fib(n-2)` until it hits the base case.
+- This directly follows the mathematical definition of Fibonacci.
 
-### 🧠 Example (n = 5):
+### ⚠️ Time & Space Complexity:
 
-```
-fib(5) = fib(4) + fib(3)
-       = (fib(3) + fib(2)) + (fib(2) + fib(1))
-       = ...
-```
+- **Time**: `O(2^n)` — Exponential growth due to repeated calculations.
+- **Space**: `O(n)` — Due to call stack from recursion depth.
 
-### ❌ Problems:
+### 🚫 Downsides:
 
-- **Time Complexity: O(2^n)** → exponential!
-- **Space Complexity: O(n)** due to call stack.
-- Extremely inefficient for large `n` because it recalculates the same values many times (no memoization).
+- Extremely slow for large `n` (e.g. `fib(40)` takes noticeable time).
+- Lots of repeated computation (`fib(30)` may compute `fib(20)` dozens of times).
 
 ---
 
-## ✅ 2. **Iterative Fibonacci using `temp`**
+## ✅ 2. **Iterative Fibonacci with Temp Variable**
 
 ```js
 var fib = function (n) {
@@ -50,21 +46,24 @@ var fib = function (n) {
 };
 ```
 
-### 🔍 How it works:
+### 🔍 How It Works:
 
-- Uses a loop to calculate Fibonacci values from the bottom up.
-- `n1` holds fib(i - 2), `n2` holds fib(i - 1)
-- Updates them in each iteration.
+- Uses a simple loop to update two variables (`n1` and `n2`) iteratively.
+- Avoids recursion entirely.
 
-### ✅ Advantages:
+### ✅ Time & Space Complexity:
 
-- **Time Complexity: O(n)**
-- **Space Complexity: O(1)** → no recursion, constant space.
-- Very efficient and readable.
+- **Time**: `O(n)`
+- **Space**: `O(1)` — Constant space, no recursion or extra data structures.
+
+### ✅ Benefits:
+
+- Fast and memory-efficient.
+- Ideal for most practical use cases.
 
 ---
 
-## ✅ 3. **Iterative Fibonacci using destructuring**
+## ✅ 3. **Iterative Fibonacci Using Destructuring**
 
 ```js
 var fib = function (n) {
@@ -80,36 +79,77 @@ var fib = function (n) {
 };
 ```
 
-### 🔍 How it works:
+### 🔍 How It Works:
 
-- Same logic as the second version, but uses array destructuring to swap values in one line.
+- Same logic as the previous loop, but uses **array destructuring** for cleaner swapping.
 
-### ✅ Pros:
+### ✅ Time & Space Complexity:
 
-- **Same time and space complexity** as version 2.
-- More concise and elegant.
+- **Time**: `O(n)`
+- **Space**: `O(1)`
 
-### ❗ Potential downside:
+### ⚠️ Minor Note:
 
-- Slightly less performant in tight loops (due to array creation), but very minor difference.
-
----
-
-## 🔚 Summary Table:
-
-| Version              | Time Complexity | Space Complexity | Readability | Performance        |
-| -------------------- | --------------- | ---------------- | ----------- | ------------------ |
-| Recursive            | ❌ O(2^n)       | ❌ O(n)          | ✅ Easy     | ❌ Very slow       |
-| Iterative (`temp`)   | ✅ O(n)         | ✅ O(1)          | ✅ Clear    | ✅ Fast            |
-| Iterative (destruct) | ✅ O(n)         | ✅ O(1)          | ✅ Elegant  | ⚠️ Slightly slower |
+- Slightly slower than the `temp` version due to destructuring overhead (microseconds).
+- Still a solid and elegant solution.
 
 ---
 
-### 🏆 **Best Choice?**
-
-For **most real-world cases**, use the **iterative with temp** version:
+## ✅ 4. **Recursive Fibonacci with Memoization (Map)**
 
 ```js
+var fib = function (n) {
+  const map = new Map([
+    [1, 1],
+    [0, 0],
+    [2, 1],
+    [3, 2],
+  ]);
+
+  const recursive = (n1) => {
+    if (!map.has(n1)) {
+      map.set(n1, recursive(n1 - 1) + recursive(n1 - 2));
+    }
+    return map.get(n1);
+  };
+  return recursive(n);
+};
+```
+
+### 🔍 How It Works:
+
+- Recursively calculates Fibonacci numbers but **stores** previously computed values in a `Map`.
+- This avoids recomputing values (a big improvement over naive recursion).
+
+### ✅ Time & Space Complexity:
+
+- **Time**: `O(n)`
+- **Space**: `O(n)` — Because it stores up to `n` values in the `Map`.
+
+### ✅ Benefits:
+
+- Elegant mix of recursion + optimization.
+- Ideal when you're already working with recursion or want a more functional approach.
+
+---
+
+## 🏆 **Which One Is Best?**
+
+| Version                   | Time Complexity | Space Complexity | Speed              | Readability | Recommended Use                 |
+| ------------------------- | --------------- | ---------------- | ------------------ | ----------- | ------------------------------- |
+| Recursive (Naive)         | ❌ O(2^n)       | O(n)             | ❌ Slow            | ✅ High     | For teaching/concept only       |
+| Iterative (with temp)     | ✅ O(n)         | ✅ O(1)          | ✅ Fast            | ✅ High     | ✅ Best for real-world use      |
+| Iterative (destructuring) | ✅ O(n)         | ✅ O(1)          | ⚠️ Slightly slower | ✅ Clean    | Good if you like concise code   |
+| Memoized Recursive (Map)  | ✅ O(n)         | ⚠️ O(n)          | ✅ Fast            | ✅ High     | Great if recursion is preferred |
+
+---
+
+### ✅ Final Verdict:
+
+For **performance-critical or production code**, go with:
+
+```js
+// Best all-around:
 var fib = function (n) {
   if (n <= 1) {
     return n;
@@ -125,6 +165,4 @@ var fib = function (n) {
 };
 ```
 
-It’s fast, clear, and doesn't rely on recursion.
-
-Would you like to see how to write a **memoized** version of the recursive one to make it efficient too?
+Want a visual chart comparing how they scale for large `n`?
