@@ -164,5 +164,3 @@ var fib = function (n) {
   return n2;
 };
 ```
-
-Want a visual chart comparing how they scale for large `n`?
