@@ -1,5 +1,3 @@
-Here’s the cleaned-up version in Markdown format, suitable for documentation or sharing:
-
 # Pivot Index Problem
 
 ## Problem Summary
